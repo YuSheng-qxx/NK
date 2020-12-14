@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int NumberOf1Between1AndN_Solution(int n)
+    {
+        int count=0;
+        for(int i=1;i<=n;i++)
+        {
+            count+=CountOne(i);
+        }
+        return count;
+    }
+    int CountOne(int x)
+    {
+        int ret=0;
+        while(x>0)
+        {
+            if(x%10 == 1)
+                ret++;
+            x /= 10;
+        }
+        return ret;
+    }
+};
