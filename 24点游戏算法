@@ -1,0 +1,28 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+bool Judje(vector<double> a, int num, double ret)
+{
+    if(a.empty())
+        return num == ret;
+    for(int i=0; i<a.size() ;i++)
+    {
+        vector<double> b(a);
+        b.erase(b.begin()+i);
+        if(Judje(b,num,ret+a[i]) || Judje(b,num,ret-a[i])
+           || Judje(b,num,ret*a[i]) || Judje(b,num,ret/a[i]))
+            return true;
+    }
+    return false;
+}
+int main()
+{
+    vector<double> a(4,0);
+    while(cin >> a[0] >> a[1] >> a[2] >> a[3])
+    {
+        if(Judje(a,24,0))
+            cout<<"true"<<endl;
+        else cout<<"false"<<endl;
+    }
+    return 0;
+}
