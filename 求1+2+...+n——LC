@@ -1,0 +1,23 @@
+class Solution {
+public:
+    class Sum
+    {
+        public:
+            Sum(){
+                sum+=i;
+                i++;
+            }
+    };
+    int sumNums(int n) {
+        sum = 0;
+        i = 1;
+        Sum arr[n];
+        return sum;
+    }
+private:
+    static int i;
+    static int sum;
+};
+
+int Solution::i = 1;
+int Solution::sum = 0;
