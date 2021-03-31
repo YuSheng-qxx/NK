@@ -1,0 +1,27 @@
+/*
+struct ListNode {
+	int val;
+	struct ListNode *next;
+	ListNode(int x) :
+			val(x), next(NULL) {
+	}
+};*/
+class Solution {
+public:
+    ListNode* ReverseList(ListNode* pHead) {
+        ListNode *list = NULL;
+        ListNode *node;
+        if(pHead == NULL)
+        {
+            return NULL;
+        }
+        while(pHead != NULL){
+            node = pHead;
+            pHead = pHead->next;
+            
+            node->next = list;
+            list = node;
+        }
+        return list;
+    }
+};
