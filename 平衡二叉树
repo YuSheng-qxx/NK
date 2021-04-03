@@ -1,3 +1,4 @@
+解1：
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
@@ -30,5 +31,29 @@ public:
             return false;
         }
         return isBalanced(root->left) && isBalanced(root->right);
+    }
+};
+
+
+
+解2：
+class Solution {
+public:
+    int Height(TreeNode* root)
+    {
+        if(root == NULL){
+            return 0;
+        }
+        int lh = Height(root->left);
+        int rh = Height(root->right);
+        return (lh>rh?lh:rh)+1;
+    }
+    bool IsBalanced_Solution(TreeNode* pRoot) {
+        if(pRoot == NULL){
+            return true;
+        }
+        int num1 = Height(pRoot->left);
+        int num2 = Height(pRoot->right);
+        return abs(num1-num2)<2 && IsBalanced_Solution(pRoot->left) && IsBalanced_Solution(pRoot->right);
     }
 };
