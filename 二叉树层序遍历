@@ -1,0 +1,43 @@
+/**
+ * struct TreeNode {
+ *	int val;
+ *	struct TreeNode *left;
+ *	struct TreeNode *right;
+ * };
+ */
+
+class Solution {
+public:
+    /**
+     * 
+     * @param root TreeNode类 
+     * @return int整型vector<vector<>>
+     */
+    vector<vector<int> > levelOrder(TreeNode* root) {
+        // write code here
+        queue<TreeNode*> q;
+        TreeNode* cur = root;
+        vector<vector<int>> mat;
+        if(root){
+            q.push(root);
+        }
+        while(!q.empty())
+        {
+            vector<int> row;
+            int sz=q.size();
+            while(sz--)
+            {
+                
+                cur=q.front();
+                q.pop();
+                row.push_back(cur->val);
+                if(cur->left)
+                    q.push(cur->left);
+                if(cur->right)
+                    q.push(cur->right);
+            }
+            mat.push_back(row);
+        }
+        return mat;
+    }
+};
