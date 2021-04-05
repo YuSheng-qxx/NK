@@ -1,0 +1,71 @@
+/**
+ * struct TreeNode {
+ *	int val;
+ *	struct TreeNode *left;
+ *	struct TreeNode *right;
+ * };
+ */
+
+class Solution {
+public:
+    /**
+     * 
+     * @param root TreeNode类 the root
+     * @return bool布尔型vector
+     */
+    bool IsWhole(TreeNode* node)
+    {
+        if(node == NULL)
+            return true;
+        queue<TreeNode*> que;
+        que.push(node);
+        TreeNode* temp = NULL;
+        int cnt = 0;
+        bool flag = false;
+        while(!que.empty()){
+            int size = que.size();
+            for(int i = 0; i < size; i++){
+                temp = que.front();
+                if(flag){
+                    if(temp->left || temp->right)
+                        return false;
+                }
+                que.pop();
+                if(temp->right && temp->left == NULL){
+                    return false;
+                }
+                if((temp->left && temp->right == NULL ) || (temp->left == NULL && temp->right == NULL)){
+                    flag = true;
+                }
+                if(temp->left)
+                   que.push(temp->left);
+                if(temp->right)
+                   que.push(temp->right);
+            }
+        }
+        return true;
+    }
+    bool IsSearch(TreeNode* root, int left, int right)
+    {
+        if(root==nullptr){
+            return true;
+        }
+        if(root->val<left||root->val>right){
+            return false;
+        }
+        return IsSearch(root->left, left, root->val)&&IsSearch(root->right, root->val, right);
+    }
+    
+    vector<bool> judgeIt(TreeNode* root) {
+        // write code here
+        vector<bool> v(2, true);
+        if(root == NULL){
+            return v;
+        }
+        bool ret1 = IsSearch(root, INT_MIN, INT_MAX);
+        bool ret2 = IsWhole(root);
+        v[0] = ret1;
+        v[1] = ret2;
+        return v;
+    }
+};
