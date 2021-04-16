@@ -1,0 +1,24 @@
+#include<iostream>
+#include<string>
+#include<algorithm>
+using namespace std;
+int main()
+{
+    string str1;
+    string str2;
+    while(cin >> str1 >>str2){
+        int count = 0;
+        int i = 0;
+        for(;i <= str1.size(); i++){
+            string str3 = str1;
+            str3.insert(i, str2);
+            string str4 = str3;
+            reverse(str4.begin(), str4.end());
+            if(str3 == str4){
+                count++;
+            }
+        }
+        cout<<count<<endl;
+    }
+    return 0;
+}
