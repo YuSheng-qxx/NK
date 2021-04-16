@@ -1,0 +1,14 @@
+#include<iostream>
+#include<set>
+#include<string>
+using namespace std;
+int main()
+{
+    string str;
+    set<string> st;
+    while(cin >> str){
+        st.insert(str);
+    }
+    cout << st.size() << endl;
+    return 0;
+}
