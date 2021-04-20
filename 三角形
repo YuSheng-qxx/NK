@@ -1,0 +1,39 @@
+class Solution {
+public:
+    int minimumTotal(vector<vector<int>>& triangle) {
+        /*
+        状态F(i,j)：从(0,0)到(i,j)最小路径和
+        F(i,j) = min(F(i-1,j)+F(i-1,j-1)) + a[i][j];
+        每一行第一列，最后一列只有一条路径
+        F(i,0) = F(i-1, 0)+a[i][j]
+        F(i, i) = F(i-1, i-1)+a[i][j]
+        初始状态：F(0,0) = a[0][0]
+        返回结果：min(F(row-i, j))
+        */
+        if(triangle.empty()){
+            return 0;
+        }
+        int num1 = triangle.size();
+        int num2 = triangle[0].size();
+        vector<vector<int>> mat(triangle);
+        for(int i=1; i<num1; i++){
+            for(int j=0; j<=i; j++){
+                if(j == 0){
+                    mat[i][j] = mat[i-1][j] + triangle[i][j];
+                }
+                else if(j == i){
+                    mat[i][j] = mat[i-1][j-1] + triangle[i][j];
+                }
+                else
+                    mat[i][j] = min(mat[i-1][j], mat[i-1][j-1]) + triangle[i][j];
+            }
+        }
+        int _min = mat[num1-1][0];
+        for(int i=1; i<num1; i++){
+            if(mat[num1-1][i] < _min){
+                _min = mat[num1-1][i];
+            }
+        }
+        return _min;
+    }
+};
