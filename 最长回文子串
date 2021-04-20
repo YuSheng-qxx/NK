@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int getLongestPalindrome(string A, int n) {
+        // write code here
+        int left = 0;
+        int right = 0;
+        int i=0;
+        int _max = 0;
+        for(; i<n; i++){
+            left = i;
+            right = i;
+            while(left >=0 && right<n && A[left] == A[right]){
+                left--;
+                right++;
+            }
+            _max = max(_max, right-left-1);
+            left = i;
+            right = i+1;
+            while(left >=0 && right<n && A[left] == A[right]){
+                left--;
+                right++;
+            }
+            _max = max(_max, right-left-1);
+        }
+        return _max;
+    }
+};
