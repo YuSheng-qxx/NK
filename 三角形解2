@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int minimumTotal(vector<vector<int>>& triangle) {
+        /*
+        状态F(i,j)：从(i,j)到最后一行最小路径和
+        F(i,j) = min(F(i——1,j)+F(i+1,j+1)) + a[i][j];
+        初始状态：F(row-1，j) = a[row-1][j]
+        返回结果：F[0][0]
+        */
+        if(triangle.empty()){
+            return 0;
+        }
+        int row = triangle.size();
+        int col = triangle[0].size();
+        vector<vector<int>> mat(triangle);
+        for(int i=row-2; i>=0; i--){
+            for(int j=0; j<=i; j++){
+                mat[i][j] = min(mat[i+1][j], mat[i+1][j+1])+triangle[i][j];
+            }
+        }
+        return mat[0][0];
+    }
+};
