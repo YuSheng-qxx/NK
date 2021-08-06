@@ -4,6 +4,7 @@ public:
         if (N == 0) {
             return 1.0;
         }
+        
         double y = quickMul(x, N / 2);
         return N % 2 == 0 ? y * y : y * y * x;
     }
